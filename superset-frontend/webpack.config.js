@@ -43,6 +43,7 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const {
   mode = 'development',
   devserverPort = 9000,
+  devserverHost = 'localhost',
   measure = false,
   analyzeBundle = false,
   analyzerPort = 8888,
@@ -469,6 +470,7 @@ if (isDevMode) {
     inline: true,
     stats: 'minimal',
     overlay: true,
+    host: devserverHost,
     port: devserverPort,
     // Only serves bundled files from webpack-dev-server
     // and proxy everything else to Superset backend
