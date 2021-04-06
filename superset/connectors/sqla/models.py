@@ -1151,12 +1151,40 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
         where_clause_and = []
         having_clause_and = []
 
+        def parse_sql_columns(sql):
+            import sqlparse
+            from sqlparse.sql import IdentifierList, Identifier
+            from sqlparse.tokens import Keyword
+            import re
+            if not sql:
+                return {}
+
+            def _parse_sql_columns(_sql):
+                columns = []
+                parsed = sqlparse.parse(_sql)
+                stmt = parsed[0]
+                for token in stmt.tokens:
+                    if isinstance(token, IdentifierList):
+                        for identifier in token.get_identifiers():
+                            columns.append(str(identifier))
+                    if isinstance(token, Identifier):
+                        columns.append(str(token))
+                    if token.ttype is Keyword:  # from
+                        break
+                return columns
+            _columns = _parse_sql_columns(sql)
+            return dict([re.split(r"\s+as\s+", c, flags=re.IGNORECASE) for c in _columns])
+
         for flt in filter:  # type: ignore
             if not all([flt.get(s) for s in ["col", "op"]]):
                 continue
-            col = flt["col"]
             val = flt.get("val")
             op = flt["op"].upper()
+            mapping = parse_sql_columns(str(tbl))
+            if self.is_sqllab_view and flt["col"] in mapping:
+                col = mapping.get(flt["col"])
+            else:
+                col = flt["col"]
             col_obj = columns_by_name.get(col)
             if col_obj:
                 col_spec = db_engine_spec.get_column_spec(col_obj.type)
