@@ -310,7 +310,7 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-sources": "^1.4.3",
-    "yargs": "^15.4.1"
+    "yargs": "^17.0.1"
   },
   "stylelint": {
     "rules": {
