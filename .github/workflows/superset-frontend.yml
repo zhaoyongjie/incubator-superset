@@ -37,26 +37,30 @@ jobs:
         uses: ./.github/actions/cached-dependencies
         with:
           run: npm-install
-      - name: lint
-        if: steps.check.outcome == 'failure'
-        working-directory: ./superset-frontend
-        run: |
-          npm run lint
-          npm run prettier-check
-      - name: Build plugins packages
-        if: steps.check.outcome == 'failure'
-        working-directory: ./superset-frontend
-        run: npm run plugins:build
+      #      - name: lint
+      #        if: steps.check.outcome == 'failure'
+      #        working-directory: ./superset-frontend
+      #        run: |
+      #          npm run lint
+      #          npm run prettier-check
+      #      - name: Build plugins packages
+      #        if: steps.check.outcome == 'failure'
+      #        working-directory: ./superset-frontend
+      #        run: npm run plugins:build
       - name: Build plugins Storybook
         if: steps.check.outcome == 'failure'
         working-directory: ./superset-frontend
         run: npm run plugins:build-storybook
-      - name: unit tests
-        if: steps.check.outcome == 'failure'
-        working-directory: ./superset-frontend
-        run: |
-          npm run test -- --coverage
-      - name: Upload code coverage
-        if: steps.check.outcome == 'failure'
-        working-directory: ./superset-frontend
-        run: ../.github/workflows/codecov.sh -c -F javascript
+      - uses: actions/upload-artifact@v2
+        with:
+          name: storybookBuild
+          path: ./packages/superset-ui-demo/storybook-static/
+#      - name: unit tests
+#        if: steps.check.outcome == 'failure'
+#        working-directory: ./superset-frontend
+#        run: |
+#          npm run test -- --coverage
+#      - name: Upload code coverage
+#        if: steps.check.outcome == 'failure'
+#        working-directory: ./superset-frontend
+#        run: ../.github/workflows/codecov.sh -c -F javascript
