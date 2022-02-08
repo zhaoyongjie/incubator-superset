@@ -165,6 +165,7 @@ export default function transformProps(
   );
 
   rawSeriesA.forEach(entry => {
+    console.log('series a', entry);
     const transformedSeries = transformSeries(entry, colorScale, {
       area,
       markerEnabled,
@@ -175,6 +176,7 @@ export default function transformProps(
       stack,
       yAxisIndex,
       filterState,
+      seriesHash: `query a ${entry.id}`,
     });
     if (transformedSeries) series.push(transformedSeries);
   });
@@ -189,6 +191,7 @@ export default function transformProps(
       stack: stackB,
       yAxisIndex: yAxisIndexB,
       filterState,
+      seriesHash: `query b ${entry.id}`,
     });
     if (transformedSeries) series.push(transformedSeries);
   });

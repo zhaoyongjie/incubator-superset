@@ -83,6 +83,7 @@ export function transformSeries(
     showValueIndexes?: number[];
     thresholdValues?: number[];
     richTooltip?: boolean;
+    seriesHash?: string;
   },
 ): SeriesOption | undefined {
   const { name } = series;
@@ -103,6 +104,7 @@ export function transformSeries(
     showValueIndexes = [],
     thresholdValues = [],
     richTooltip,
+    seriesHash,
   } = opts;
   const contexts = seriesContexts[name || ''] || [];
   const hasForecast =
@@ -148,7 +150,7 @@ export function transformSeries(
     plotType = seriesType === 'bar' ? 'bar' : 'line';
   }
   const itemStyle = {
-    color: colorScale(forecastSeries.name),
+    color: colorScale(seriesHash || forecastSeries.name),
     opacity,
   };
   let emphasis = {};
