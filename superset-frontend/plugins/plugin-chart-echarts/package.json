@@ -28,7 +28,7 @@
   "dependencies": {
     "@superset-ui/chart-controls": "0.18.25",
     "@superset-ui/core": "0.18.25",
-    "d3-array": "^1.2.0",
+    "d3-array": "^3.1.4",
     "echarts": "^5.2.2",
     "lodash": "^4.17.15"
   },
