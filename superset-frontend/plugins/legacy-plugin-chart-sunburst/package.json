@@ -22,7 +22,7 @@
     "lib"
   ],
   "dependencies": {
-    "d3": "^3.5.17",
+    "d3": "^7.8.0",
     "prop-types": "^15.6.2"
   },
   "peerDependencies": {
