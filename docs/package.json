@@ -63,7 +63,7 @@
     "@swc/core": "^1.16.2",
     "antd": "^6.6.4",
     "baseline-browser-mapping": "^2.11.23",
-    "caniuse-lite": "^1.0.30001810",
+    "caniuse-lite": "^1.0.30001813",
     "docusaurus-plugin-openapi-docs": "^5.2.0",
     "docusaurus-theme-openapi-docs": "^5.2.0",
     "js-yaml": "^5.4.2",
